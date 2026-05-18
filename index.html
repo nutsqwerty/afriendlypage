@@ -5,46 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>yourfriendlyweb</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="./css/site.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Welcome to yourfriendlyweb!</h1>
-        <p class="subtitle">✿ take a deep breath and let your worries drift away ✿</p>
-        
-        <p class="description">
-            this is your safe, quiet corner of the internet to just be, unwind, and rest. 
-            wrap yourself in a cozy blanket, watch the falling petals, and stay as long as you need.
-        </p>
-        
-        <hr class="divider">
-
-        <div id="jar-container" style="cursor: pointer;">
-            <p class="tap-instruction">feeling heavy? tap the jar to get a gentle reminder...</p>
-            
-            <div class="jar-svg-container">
-                <svg width="120" height="180" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M30,20 Q30,15 35,15 L65,15 Q70,15 70,20 L70,30 Q70,40 85,50 L85,130 Q85,140 75,140 L25,140 Q15,140 15,130 L15,50 Q30,40 30,30 Z" fill="none" stroke="white" stroke-width="4"/>
-                    <path d="M35,15 L65,15" stroke="white" stroke-width="6" stroke-linecap="round"/>
-                    <path d="M50,75 Q40,65 50,55 Q60,65 50,75 Z" fill="pink"/>
-                </svg>
+    <header>
+        <nav class="navbar">
+            <div class="audio-controls">
+                <button id="btn-rain" class="audio-toggle-btn">
+                    <span class="icon">🌧️</span> gentle rain: off
+                </button>
             </div>
-        </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid main-wrapper-body">
+        <main role="main" class="pb-3">
+            
+            <div class="container">
+                <h1>Welcome to yourfriendlyweb!</h1>
+                <p class="subtitle">✿ take a deep breath and let your worries drift away ✿</p>
+                
+                <p class="description">
+                    this is your safe, quiet corner of the internet to just be, unwind, and rest. 
+                    wrap yourself in a cozy blanket, watch the falling petals, and stay as long as you need.
+                </p>
+                
+                <hr class="divider">
+
+                <div id="jar-container" style="cursor: pointer;">
+                    <p class="tap-instruction">feeling heavy? tap the jar to get a gentle reminder...</p>
+                    
+                    <div class="jar-svg-container">
+                        <svg width="140" height="200" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="32" y="10" width="36" height="8" rx="3" fill="none" stroke="#ffffff" stroke-width="4"/>
+                            <line x1="30" y1="18" x2="70" y2="18" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M35,18 L35,28 C35,38 20,44 20,55 L20,130 C20,140 30,145 40,145 L60,145 C70,145 80,140 80,130 L80,55 C80,44 65,38 65,28 L65,18 Z" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/>
+                            <path d="M50,90 Q42,75 50,60 Q58,75 50,90 Z" fill="#ffb7c5" opacity="0.85"/>
+                            <path d="M28,65 Q25,85 28,110" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
 
     <div id="thought-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="flower-icon">✿</span>
-            
             <p id="modal-thought-text">Loading a gentle thought...</p>
-            
             <div class="modal-buttons">
                 <button id="btn-next-leaf" class="btn-action">pick another leaf 🍃</button>
                 <button id="btn-close-box" class="btn-close">close box ✿</button>
             </div>
         </div>
     </div>
+
+    <audio id="audio-rain" loop src="https://assets.mixkit.co/active_storage/sfx/2433/2433-84.wav"></audio>
 
     <script src="./js/thoughts.js"></script>
     <script src="./js/site.js"></script>
