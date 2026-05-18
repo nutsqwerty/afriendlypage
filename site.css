@@ -1,3 +1,4 @@
+/* Core Styling Reset & Colors */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,120 +6,176 @@
 }
 
 body {
-    background-color: #fbcbc9; 
-    font-family: 'Comfortaa', 'Segoe UI', cursive, sans-serif;
+    background: linear-gradient(135deg, #fbcbc9 0%, #e8cbf5 100%); /* Gorgeous soft pink-lavender background gradient */
+    font-family: 'Comfortaa', 'Segoe UI', sans-serif;
     color: #5a3d41;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     overflow-x: hidden;
+    position: relative;
 }
 
-/* Audio Control Navigation Layer */
-header {
-    width: 100%;
-    position: absolute;
+/* Falling Cherry Blossom Petals Background Generation Layer */
+.falling-petals-bg {
+    position: fixed;
     top: 0;
     left: 0;
-    padding: 15px 30px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.petal {
+    position: absolute;
+    background-color: #ffb7c5;
+    border-radius: 150% 0 150% 150%;
+    opacity: 0.7;
+    animation: fadeFall linear infinite;
+}
+
+/* ASP.NET Core Top Navigation Bar Clone */
+header {
+    width: 100%;
+    background-color: rgba(24bcbc9, 0.7);
+    background: #f7bdbe; /* Matches the solid top banner row layout */
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    padding: 12px 40px;
 }
 
 .navbar {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.nav-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #4a2e32;
+    margin-right: 30px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-grow: 1;
+}
+
+.nav-item {
+    font-size: 0.95rem;
+    color: #5a3d41;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.nav-item.active {
+    color: #4a2e32;
+    font-weight: 700;
+}
+
+.audio-controls {
+    margin-left: auto;
 }
 
 .audio-toggle-btn {
-    background: rgba(255, 255, 255, 0.4);
-    border: 2px solid #ffffff;
-    padding: 8px 16px;
-    border-radius: 20px;
-    color: #5a3d41;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #ffffff;
+    padding: 6px 14px;
+    border-radius: 15px;
+    color: #4a2e32;
     cursor: pointer;
     font-family: inherit;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
 }
 
 .audio-toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.7);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.8);
 }
 
-/* Glassmorphism Centered Card Container Layout */
-.container {
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    max-width: 650px;
-    padding: 40px;
-    border-radius: 24px;
-    border: 2px solid #ffffff;
-    box-shadow: 0 10px 30px rgba(90, 61, 65, 0.05);
+/* Main Screen Centered Body View Wrapper */
+.main-wrapper-body {
+    padding-top: 100px; /* Leaves clear space under the top navbar row */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* The Beautiful Main Floating White Presentation Card */
+.main-card-container {
+    background: rgba(255, 255, 255, 0.82); /* Soft semi-transparent white card */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    max-width: 720px;
+    width: 90%;
+    padding: 50px 40px;
+    border-radius: 32px;
+    box-shadow: 0 15px 35px rgba(90, 61, 65, 0.06);
     text-align: center;
-    margin: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 h1 {
-    font-size: 2.2rem;
-    margin-bottom: 12px;
-    color: #4a2e32;
+    font-size: 2.4rem;
+    margin-bottom: 16px;
+    color: #4a2e32; /* Deep warm plum text color */
     font-weight: 700;
 }
 
 .subtitle {
     font-size: 1.05rem;
-    opacity: 0.85;
-    margin-bottom: 20px;
-    font-style: italic;
+    color: #5a3d41;
+    margin-bottom: 28px;
+    font-weight: 700;
 }
 
 .description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    opacity: 0.9;
-    margin-bottom: 25px;
-}
-
-.divider {
-    border: none;
-    height: 2px;
-    background: linear-gradient(to right, transparent, #ffffff, transparent);
-    margin: 25px auto;
-    width: 80%;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #5a3d41;
+    margin-bottom: 35px;
 }
 
 .tap-instruction {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-    opacity: 0.75;
-    animation: pulse 2s infinite ease-in-out;
+    font-size: 0.95rem;
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #5a3d41;
 }
 
-/* Smooth Interactive SVG Container Animations */
+#jar-container {
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Interactive SVG Jar Container Scaling Movements */
 .jar-svg-container {
     display: inline-block;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #jar-container:hover .jar-svg-container {
-    transform: scale(1.08) rotate(2deg);
+    transform: scale(1.06) translateY(-4px);
 }
 
-#jar-container:active .jar-svg-container {
-    transform: scale(0.95);
-}
-
-/* Pop-up Overlay Frame Element Styles */
+/* Affirmation Overlay Popup View Modal */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(90, 61, 65, 0.4);
+    background: rgba(90, 61, 65, 0.35);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     display: flex;
@@ -129,14 +186,14 @@ h1 {
 
 .modal-content {
     background: #ffffff;
-    max-width: 480px;
-    width: 90%;
+    max-width: 460px;
+    width: 88%;
     padding: 35px;
-    border-radius: 20px;
+    border-radius: 24px;
     text-align: center;
-    border: 3px solid #ffb7c5;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid #ffb7c5;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+    animation: popIn 0.3s ease-out;
 }
 
 .flower-icon {
@@ -149,42 +206,40 @@ h1 {
 #modal-thought-text {
     font-size: 1.1rem;
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     color: #4a2e32;
 }
 
 .modal-buttons {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .btn-action, .btn-close {
-    padding: 12px 24px;
-    border-radius: 25px;
+    padding: 12px;
+    border-radius: 20px;
     font-family: inherit;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.2s ease;
     width: 100%;
+    transition: background 0.2s;
 }
 
 .btn-action {
     background: #ffb7c5;
-    border: 2px solid #ffb7c5;
+    border: none;
     color: #ffffff;
     font-weight: bold;
 }
 
 .btn-action:hover {
     background: #ffa4b4;
-    border-color: #ffa4b4;
-    transform: translateY(-1px);
 }
 
 .btn-close {
     background: transparent;
-    border: 2px dashed #ffb7c5;
+    border: 1.5px dashed #ffb7c5;
     color: #ffb7c5;
 }
 
@@ -192,12 +247,25 @@ h1 {
     background: rgba(255, 183, 197, 0.1);
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 0.95; }
+/* Animation Layout Keyframes */
+@keyframes fadeFall {
+    0% {
+        transform: translateY(-10px) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(105vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 @keyframes popIn {
-    from { transform: scale(0.85); opacity: 0; }
+    from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
