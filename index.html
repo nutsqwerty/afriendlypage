@@ -10,7 +10,7 @@
     
     <style>
         :root {
-            --bg-color: #fca8b4; /* Your local project's pink color */
+            --bg-color: #fca8b4; 
             --text-main: #ffffff;
             --accent-pink: #fff0f2;
         }
@@ -98,6 +98,7 @@
             transition: transform 0.2s ease;
             position: relative;
             display: inline-block;
+            -webkit-tap-highlight-color: transparent; /* Fixes mobile tap flashing */
         }
 
         .jar-container:hover {
@@ -114,41 +115,43 @@
             filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.1));
         }
 
-        /* Make jar silhouette white with a subtle transparency */
-        .jar-svg .jar-body {
-            fill: rgba(255, 255, 255, 0.25) !important;
+        /* Fixed crisp white fills for the SVG paths */
+        .jar-svg path {
             stroke: #ffffff !important;
-            stroke-width: 3px;
+            stroke-width: 2.5px;
         }
-        
+
         .jar-svg .jar-lid, .jar-svg .jar-neck {
             fill: #ffffff !important;
-            stroke: #ffffff !important;
-            stroke-width: 2px;
+        }
+
+        .jar-svg .jar-body {
+            fill: rgba(255, 255, 255, 0.25) !important;
         }
 
         .jar-svg .jar-heart {
             fill: #ffffff !important;
+            stroke: none !important;
         }
 
-        /* Floating thoughts box */
+        /* Floating thoughts box - Fixed Text Visibility */
         .message-box {
             min-height: 60px;
             font-family: 'Comfortaa', cursive;
             font-size: 1.2rem;
             font-weight: bold;
-            color: #ffffff;
+            color: #ffffff !important; /* Forces solid white text color */
             padding: 15px 25px;
             border-radius: 20px;
-            background-color: rgba(255, 255, 255, 0.15); /* Glass card effect */
-            border: 2px dashed var(--accent-pink);
+            background-color: rgba(255, 255, 255, 0.2); 
+            border: 2px dashed #ffffff;
             width: 80%;
             max-width: 450px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.2s ease;
-            margin-top: 10px;
+            margin-top: 15px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -193,12 +196,7 @@
         function drawThought() {
             const display = document.getElementById('thought-display');
             const randomIndex = Math.floor(Math.random() * thoughts.length);
-            
-            display.style.opacity = 0;
-            setTimeout(() => {
-                display.innerText = thoughts[randomIndex];
-                display.style.opacity = 1;
-            }, 150);
+            display.innerText = thoughts[randomIndex];
         }
 
         // Generate Falling Sakura Petals dynamically
