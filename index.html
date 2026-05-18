@@ -1,354 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - yourfriendlyweb</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yourfriendlyweb</title>
+    
+    <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
-            <div class="navbar-custom-container">
-                <div class="nav-left-group">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">yourfriendlyweb</a>
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </div>
 
-                <div class="top-right-audio-deck">
-                    <button id="btn-lofi" class="audio-toggle-btn" onclick="toggleAudio('lofi')">
-                        <span class="icon">🎵</span> lofi music: off
-                    </button>
-                    <button id="btn-rain" class="audio-toggle-btn" onclick="toggleAudio('rain')">
-                        <span class="icon">🌧️</span> gentle rain: off
-                    </button>
-                </div>
+    <div class="container">
+        <h1>Welcome to yourfriendlyweb!</h1>
+        <p class="subtitle">✿ take a deep breath and let your worries drift away ✿</p>
+        
+        <p class="description">
+            this is your safe, quiet corner of the internet to just be, unwind, and rest. 
+            wrap yourself in a cozy blanket, watch the falling petals, and stay as long as you need.
+        </p>
+        
+        <hr class="divider">
+
+        <div id="jar-container" style="cursor: pointer;">
+            <p class="tap-instruction">feeling heavy? tap the jar to get a gentle reminder...</p>
+            
+            <div class="jar-svg-container">
+                <svg width="120" height="180" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30,20 Q30,15 35,15 L65,15 Q70,15 70,20 L70,30 Q70,40 85,50 L85,130 Q85,140 75,140 L25,140 Q15,140 15,130 L15,50 Q30,40 30,30 Z" fill="none" stroke="white" stroke-width="4"/>
+                    <path d="M35,15 L65,15" stroke="white" stroke-width="6" stroke-linecap="round"/>
+                    <path d="M50,75 Q40,65 50,55 Q60,65 50,75 Z" fill="pink"/>
+                </svg>
             </div>
-        </nav>
-    </header>
-
-    <div class="container-fluid main-wrapper-body">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    <div id="thought-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="flower-icon">✿</span>
+            
+            <p id="modal-thought-text">Loading a gentle thought...</p>
+            
+            <div class="modal-buttons">
+                <button id="btn-next-leaf" class="btn-action">pick another leaf 🍃</button>
+                <button id="btn-close-box" class="btn-close">close box ✿</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/thoughts.js"></script>
+    <script src="js/site.js"></script>
 </body>
 </html>
-
-@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="sakura-rain-container" id="sakura-container"></div>
-<div class="sparkle-star s1"></div>
-<div class="sparkle-star s2"></div>
-<div class="sparkle-star s3"></div>
-
-<div class="layout-nav-interceptor">
-    <button class="about-nav-btn" onclick="openAboutModal()" aria-label="About this website">
-        ✿ about
-    </button>
-</div>
-
-<div class="welcome-container">
-    <div class="lofi-frosted-panel">
-        <h1 class="lofi-main-title">Welcome to yourfriendlyweb!</h1>
-        <p class="lofi-subtitle">✿ take a deep breath and let your worries drift away ✿</p>
-
-        <p class="lofi-body">this is your safe, quiet corner of the internet to just be, unwind, and rest. wrap yourself in a cozy blanket, watch the falling petals, and stay as long as you need.</p>
-
-        <div class="jar-section-wrapper">
-            <p class="jar-instruction">feeling heavy? tap the jar to get a gentle reminder...</p>
-
-            <button class="comfort-jar-btn" id="comfortJarButton" onclick="openComfortJar()" aria-label="Open the comfort jar">
-                <svg class="jar-svg-graphic" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#fcdad7" />
-                            <stop offset="40%" stop-color="#fca8b4" />
-                            <stop offset="100%" stop-color="#e28a98" />
-                        </linearGradient>
-                        <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="rgba(255, 255, 255, 0.9)" />
-                            <stop offset="30%" stop-color="rgba(253, 246, 247, 0.75)" />
-                            <stop offset="70%" stop-color="rgba(245, 226, 230, 0.5)" />
-                            <stop offset="100%" stop-color="rgba(230, 203, 210, 0.65)" />
-                        </linearGradient>
-                        <linearGradient id="leafLeft" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#417347" />
-                            <stop offset="50%" stop-color="#67a36e" />
-                            <stop offset="100%" stop-color="#89c290" />
-                        </linearGradient>
-                        <linearGradient id="leafRight" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#558c5c" />
-                            <stop offset="40%" stop-color="#84be8b" />
-                            <stop offset="100%" stop-color="#a3dba9" />
-                        </linearGradient>
-                    </defs>
-
-                    <ellipse cx="100" cy="222" rx="55" ry="10" fill="rgba(90, 48, 78, 0.08)" />
-
-                    <path d="M 50,75 C 50,75 42,85 42,105 L 42,195 C 42,215 55,220 100,220 C 145,220 158,215 158,195 L 158,105 C 158,85 150,75 150,75 Z"
-                          fill="url(#glassGrad)" stroke="#523646" stroke-width="4.5" stroke-linejoin="round" />
-
-                    <path d="M 43,185 C 70,190 130,182 157,185 L 157,195 C 157,212 145,217 100,217 C 55,217 43,212 43,195 Z" fill="rgba(237, 216, 222, 0.4)" />
-
-                    <path d="M 100,195 Q 96,155 101,115" fill="none" stroke="#523646" stroke-width="4.5" stroke-linecap="round" />
-
-                    <path d="M 98,150 C 78,148 68,126 97,122 C 97,122 101,136 98,150 Z" fill="url(#leafLeft)" stroke="#523646" stroke-width="4" stroke-linejoin="round" />
-                    <path d="M 97,122 Q 88,135 91,142" fill="none" stroke="#523646" stroke-width="2.5" stroke-linecap="round" />
-
-                    <path d="M 99,140 C 122,136 132,108 101,108 C 101,108 96,122 99,140 Z" fill="url(#leafRight)" stroke="#523646" stroke-width="4" stroke-linejoin="round" />
-                    <path d="M 101,108 Q 112,120 109,130" fill="none" stroke="#523646" stroke-width="2.5" stroke-linecap="round" />
-
-                    <path d="M 52,95 Q 49,145 53,190" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.6" />
-                    <path d="M 60,90 Q 57,115 61,135" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.4" />
-                    <ellipse cx="142" cy="105" rx="3" ry="12" transform="rotate(-10 142 105)" fill="#ffffff" opacity="0.5" />
-
-                    <path d="M 62,75 L 138,75 L 134,63 L 66,63 Z" fill="#ffffff" stroke="#523646" stroke-width="4.5" stroke-linejoin="round" />
-
-                    <rect x="54" y="45" width="92" height="18" rx="9" fill="url(#lidGrad)" stroke="#523646" stroke-width="4.5" />
-                    <path d="M 57,57 L 143,57" stroke="#523646" stroke-width="3" stroke-linecap="round" opacity="0.3" />
-                </svg>
-            </button>
-        </div>
-    </div>
-</div>
-
-<div class="comfort-modal-overlay" id="comfortModal" onclick="closeComfortJarOutside(event)">
-    <div class="comfort-card" onclick="event.stopPropagation()">
-
-        <div class="card-flower-container">
-            <svg class="sakura-mini-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="sakuraGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#ffccd5" />
-                        <stop offset="100%" stop-color="#fca8b4" />
-                    </linearGradient>
-                </defs>
-                <g transform="translate(50,50)">
-                    <g fill="url(#sakuraGrad)">
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" />
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" transform="rotate(72)" />
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" transform="rotate(144)" />
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" transform="rotate(216)" />
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" transform="rotate(288)" />
-                    </g>
-                    <g stroke="#f391a0" stroke-width="1.5" opacity="0.65" fill="none">
-                        <line x1="0" y1="0" x2="0" y2="-18" />
-                        <line x1="0" y1="0" x2="17" y2="-6" />
-                        <line x1="0" y1="0" x2="11" y2="15" />
-                        <line x1="0" y1="0" x2="-11" y2="15" />
-                        <line x1="0" y1="0" x2="-17" y2="-6" />
-                    </g>
-                    <circle cx="0" cy="0" r="5" fill="#fcd7bc" opacity="0.9" />
-                </g>
-            </svg>
-        </div>
-
-        <p class="comfort-message-text" id="comfortMessage">Loading a gentle thought...</p>
-        <div class="card-buttons" id="modalActionButtons">
-            <button class="btn-card-action secondary" onclick="drawAnother()">pick another leaf 🍃</button>
-            <button class="btn-card-action primary" onclick="closeComfortJar()">close box ✿</button>
-        </div>
-
-        <div class="card-buttons" id="aboutCloseButtonPanel" style="display: none;">
-            <button class="btn-card-action primary" onclick="closeComfortJar()">close ✿</button>
-        </div>
-    </div>
-</div>
-
-<footer class="lofi-footer">
-    &copy; 2026 - yourfriendlyweb
-</footer>
-
-<script>
-    const messages = [
-        "You are doing the best you can with what you have right now, and that is completely enough.",
-        "Take a deep breath. You don't have to figure everything out today. Just focus on this exact second.",
-        "It is okay to be tired. It is okay to rest. Be gentle with your mind today.",
-        "You are worthy of kindness, safety, and peace—simply because you exist.",
-        "Your feelings are valid, but they are also like clouds. Let them roll across the sky without holding onto them.",
-        "You have survived 100% of your hardest days so far. You are incredibly resilient.",
-        "The world is moving fast, but you are allowed to slow down. You aren't falling behind.",
-        "It's okay if all you did today was breathe. That's a beautiful victory.",
-        "You don't have to carry the weight of tomorrow right now. Let it go for just a little while.",
-        "In this exact moment, you are safe. There is nothing you need to fix or change right now.",
-        "Be proud of how hard you are trying, even on the days where it feels like nobody sees it.",
-        "Healing isn't a straight line, and having a heavy day doesn't erase all of your progress.",
-        "Give yourself permission to let go of expectations that aren't yours to carry.",
-        "Like flowers, you too will bloom in your own beautiful time. Do not rush your process.",
-        "You don't need to earn rest. Rest is your natural right whenever your spirit is tired."
-    ];
-
-    function openComfortJar() {
-        document.getElementById('aboutCloseButtonPanel').style.display = 'none';
-        document.getElementById('modalActionButtons').style.display = 'flex';
-        drawAnother();
-        const modal = document.getElementById('comfortModal');
-        if (modal) {
-            modal.classList.add('active');
-        }
-    }
-
-    function openAboutModal() {
-        const textEl = document.getElementById('comfortMessage');
-        if (textEl) {
-            textEl.innerText = "yourfriendlyweb is a small, quiet sanctuary made to give you a momentary break from the noise of the digital world. No trackers, no tasks, no endless feeds—just a gentle space to pause, breathe, and gather yourself.";
-            textEl.style.opacity = 1;
-        }
-        document.getElementById('modalActionButtons').style.display = 'none';
-        document.getElementById('aboutCloseButtonPanel').style.display = 'flex';
-
-        const modal = document.getElementById('comfortModal');
-        if (modal) {
-            modal.classList.add('active');
-        }
-    }
-
-    /* Standardized close functions to unify window dismiss execution paths */
-    function closeComfortJar() {
-        const modal = document.getElementById('comfortModal');
-        if (modal) {
-            modal.classList.remove('active');
-        }
-    }
-
-    function closeComfortJarOutside(e) {
-        if (e.target === document.getElementById('comfortModal')) {
-            closeComfortJar();
-        }
-    }
-
-    function drawAnother() {
-        const textEl = document.getElementById('comfortMessage');
-        if (!textEl) return;
-
-        const randomIndex = Math.floor(Math.random() * messages.length);
-
-        textEl.style.opacity = 0;
-        setTimeout(() => {
-            textEl.innerText = messages[randomIndex];
-            textEl.style.opacity = 1;
-        }, 150);
-    }
-
-    function createPetal() {
-        const container = document.getElementById('sakura-container');
-        if (!container) return;
-        const petal = document.createElement('div');
-        petal.classList.add('sakura-petal');
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = (Math.random() * 6 + 6) + 's';
-        petal.style.opacity = Math.random() * 0.6 + 0.4;
-        const size = Math.random() * 8 + 6;
-        petal.style.width = size + 'px';
-        petal.style.height = (size * 1.4) + 'px';
-        container.appendChild(petal);
-        setTimeout(() => petal.remove(), 12000);
-    }
-    setInterval(createPetal, 350);
-</script>
-
-<style>
-    /* Injected layout override configs to wipe the legacy audio layout triggers */
-    [id*="btn-lofi"],
-    [id*="btn-rain"],
-    .header-controls,
-    .audio-controls,
-    header .nav-item button,
-    header [class*="audio"] {
-        display: none !important;
-    }
-
-    /* Fixed Layout Header Interceptor Layer */
-    .layout-nav-interceptor {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 0;
-        z-index: 2000;
-        pointer-events: none;
-    }
-
-    .about-nav-btn {
-        position: absolute;
-        top: 15px;
-        right: 25px;
-        pointer-events: auto;
-        background-color: #ffffff;
-        color: #523646;
-        border: 2px solid #523646;
-        border-radius: 25px;
-        padding: 5px 22px;
-        font-family: inherit;
-        font-size: 0.92rem;
-        font-weight: 700;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-        transition: all 0.2s ease-in-out;
-    }
-
-        .about-nav-btn:hover {
-            background-color: #fca8b4;
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
-
-    .card-flower-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 22px;
-        width: 100%;
-    }
-
-    .sakura-mini-svg {
-        width: 44px;
-        height: 44px;
-        display: block;
-        animation: flowerWobble 5s ease-in-out infinite alternate;
-    }
-
-    @@keyframes flowerWobble {
-        0% {
-            transform: rotate(-3deg) scale(0.98);
-        }
-
-        100% {
-            transform: rotate(3deg) scale(1.02);
-        }
-    }
-
-    /* Mobile Media Query Enhancements */
-    @@media (max-width: 600px) {
-        .lofi-frosted-panel {
-            padding: 24px 16px !important;
-            margin: 0 12px;
-            width: calc(100% - 24px) !important;
-        }
-
-        .lofi-main-title {
-            font-size: 1.8rem !important;
-        }
-
-        .lofi-subtitle {
-            font-size: 0.95rem !important;
-        }
-
-        .jar-svg-graphic {
-            max-width: 150px !important;
-            height: auto !important;
-        }
-
-        .about-nav-btn {
-            top: 12px;
-            right: 15px;
-            padding: 4px 16px;
-            font-size: 0.85rem;
-        }
-    }
-</style>
