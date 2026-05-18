@@ -3,36 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>yourfriendlyweb</title>
+    <title>Home Page - yourfriendlyweb</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #fca8b4; 
-            --text-main: #ffffff;
-            --accent-pink: #fff0f2;
+            --bg-pink: #fca8b4;
+            --card-white: #fff0f2;
+            --text-dark: #5c4a49;
+            --accent-purple: #6e5554;
         }
 
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-pink);
+            color: var(--text-dark);
             margin: 0;
             padding: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             overflow-x: hidden;
-            text-align: center;
             position: relative;
         }
 
-        /* Sakura Rain System */
-        .sakura-container {
+        /* Top Header Navbar Matching Your Original Design */
+        header {
+            background-color: rgba(252, 168, 180, 0.5);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-purple);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Main Cozy Workspace Content Container */
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 5;
+        }
+
+        /* The Beautiful Large Rounded Card Layout */
+        .main-card {
+            background-color: var(--card-white);
+            border-radius: 35px;
+            padding: 50px 40px;
+            max-width: 750px;
+            width: 100%;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin: 0 0 15px 0;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-purple);
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px dashed rgba(110, 85, 84, 0.3);
+            margin: 30px auto;
+            width: 90%;
+        }
+
+        .prompt-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: 25px;
+        }
+
+        /* Clickable Jar Wrapper Layout */
+        .jar-box {
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .jar-box:hover {
+            transform: scale(1.05);
+        }
+
+        .jar-box:active {
+            transform: scale(0.95);
+        }
+
+        .jar-image-placeholder {
+            width: 90px;
+            height: 120px;
+            border: 3px solid var(--accent-purple);
+            border-radius: 20px 20px 30px 30px;
+            position: relative;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .jar-image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 12px;
+            background-color: var(--accent-purple);
+            border-radius: 5px;
+        }
+
+        /* Background Animated Sakura System */
+        .sakura-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -44,179 +168,48 @@
 
         .petal {
             position: absolute;
-            background-color: var(--accent-pink);
+            background-color: rgba(255, 255, 255, 0.6);
             border-radius: 150px 0px 150px 150px;
-            opacity: 0.8;
-            transform-origin: left bottom;
-            animation: fall linear infinite;
+            animation: drift linear infinite;
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-10vh) translateX(0) rotate(0deg);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(105vh) translateX(100px) rotate(360deg);
-                opacity: 0.2;
-            }
+        @keyframes drift {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(105vh) translateX(120px) rotate(360deg); opacity: 0.1; }
         }
 
-        /* Main Workspace Container */
-        .main-content {
-            z-index: 10;
-            max-width: 600px;
-            padding: 20px;
+        /* --- THE MODAL OVERLAY BOX (Your exact layout style) --- */
+        .modal-blur-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(110, 85, 84, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        h1 {
-            font-family: 'Comfortaa', cursive;
-            font-size: 2.5rem;
-            margin: 0;
-            color: #ffffff;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            font-style: italic;
-            opacity: 0.9;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* The Interactive Comfort Jar */
-        .jar-container {
-            margin: 20px 0;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            position: relative;
-            display: inline-block;
-            -webkit-tap-highlight-color: transparent; /* Fixes mobile tap flashing */
-        }
-
-        .jar-container:hover {
-            transform: scale(1.05);
-        }
-
-        .jar-container:active {
-            transform: scale(0.95) rotate(-3deg);
-        }
-
-        .jar-svg {
-            width: 140px;
-            height: 180px;
-            filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.1));
-        }
-
-        /* Fixed crisp white fills for the SVG paths */
-        .jar-svg path {
-            stroke: #ffffff !important;
-            stroke-width: 2.5px;
-        }
-
-        .jar-svg .jar-lid, .jar-svg .jar-neck {
-            fill: #ffffff !important;
-        }
-
-        .jar-svg .jar-body {
-            fill: rgba(255, 255, 255, 0.25) !important;
-        }
-
-        .jar-svg .jar-heart {
-            fill: #ffffff !important;
-            stroke: none !important;
-        }
-
-        /* Floating thoughts box - Fixed Text Visibility */
-        .message-box {
-            min-height: 60px;
-            font-family: 'Comfortaa', cursive;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ffffff !important; /* Forces solid white text color */
-            padding: 15px 25px;
-            border-radius: 20px;
-            background-color: rgba(255, 255, 255, 0.2); 
-            border: 2px dashed #ffffff;
-            width: 80%;
-            max-width: 450px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            margin-top: 15px;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
             box-sizing: border-box;
         }
-    </style>
-</head>
-<body>
 
-    <div class="sakura-container" id="sakura-box"></div>
-
-    <div class="main-content">
-        <h1>Welcome to yourfriendlyweb!</h1>
-        <p class="subtitle">✿ take a deep breath and let your worries drift away ✿</p>
-        <p class="description">
-            This is your safe, quiet corner of the internet to just be, unwind, and rest. 
-            Wrap yourself in a cozy blanket, watch the falling petals, and stay as long as you need.
-        </p>
-
-        <div class="jar-container" onclick="drawThought()">
-            <svg class="jar-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-                <path class="jar-lid" d="M35 15 h30 v6 h-30 z"/>
-                <path class="jar-neck" d="M38 21 h24 v8 h-24 z"/>
-                <path class="jar-body" d="M38 29 C25 35 20 50 20 75 C20 100 30 110 50 110 C70 110 80 100 80 75 C80 50 75 35 62 29 Z"/>
-                <path class="jar-heart" d="M50 65 C50 65 43 58 43 53 C43 49 46 46 50 50 C54 46 57 49 57 53 C57 58 50 65 50 65 Z"/>
-            </svg>
-        </div>
-
-        <div class="message-box" id="thought-display">
-            Tap the jar to get a gentle reminder...
-        </div>
-    </div>
-
-    <script>
-        // Array of comfort thoughts
-        const thoughts = [
-            "You are doing much better than you give yourself credit for.",
-            "It is completely okay to take a break right now.",
-            "Mistakes are just data points. Look how much you learned today!",
-            "Take one deep breath. In... and out. You've got this.",
-            "Your value isn't tied to your productivity. Rest is productive too.",
-            "Proud of you for trying your best.",
-            "Whatever is feeling heavy right now will pass eventually."
-        ];
-
-        function drawThought() {
-            const display = document.getElementById('thought-display');
-            const randomIndex = Math.floor(Math.random() * thoughts.length);
-            display.innerText = thoughts[randomIndex];
+        .modal-blur-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        // Generate Falling Sakura Petals dynamically
-        const sakuraBox = document.getElementById('sakura-box');
-        const petalCount = 30;
-
-        for (let i = 0; i < petalCount; i++) {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            
-            const size = Math.random() * 8 + 6; 
-            petal.style.width = `${size}px`;
-            petal.style.height = `${size + 4}px`;
-            
-            petal.style.left = `${Math.random() * 100}vw`;
-            petal.style.animationDuration = `${Math.random() * 6 + 6}s`;
-            petal.style.animationDelay = `${Math.random() * 5}s`;
-            
-            sakuraBox.appendChild(petal);
-        }
-    </script>
-</body>
-</html>
+        .quote-modal-card {
+            background-color: #fff0f2;
+            border: 3px solid var(--accent-purple);
+            border-radius: 35px;
+            padding: 40px 30px;
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0
