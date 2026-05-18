@@ -1,4 +1,3 @@
-/* Core Styling Reset & Colors */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,266 +5,172 @@
 }
 
 body {
-    background: linear-gradient(135deg, #fbcbc9 0%, #e8cbf5 100%); /* Gorgeous soft pink-lavender background gradient */
-    font-family: 'Comfortaa', 'Segoe UI', sans-serif;
-    color: #5a3d41;
+    /* Soft lavender background matching your Visual Studio screenshot */
+    background: #eedef5; 
+    font-family: 'Comfortaa', cursive, sans-serif;
+    color: #4a2e32;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
     position: relative;
 }
 
-/* Falling Cherry Blossom Petals Background Generation Layer */
-.falling-petals-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* TOP NAVBAR STYLES */
+.top-navbar {
+    background-color: #fbcbc9; /* Solid pink top bar */
     width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.petal {
-    position: absolute;
-    background-color: #ffb7c5;
-    border-radius: 150% 0 150% 150%;
-    opacity: 0.7;
-    animation: fadeFall linear infinite;
-}
-
-/* ASP.NET Core Top Navigation Bar Clone */
-header {
-    width: 100%;
-    background-color: rgba(24bcbc9, 0.7);
-    background: #f7bdbe; /* Matches the solid top banner row layout */
-    border-bottom: 1px solid rgba(255,255,255,0.3);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    padding: 12px 40px;
-}
-
-.navbar {
+    height: 65px;
     display: flex;
     align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
     width: 100%;
-}
-
-.nav-brand {
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: #4a2e32;
-    margin-right: 30px;
-}
-
-.nav-links {
-    list-style: none;
+    padding: 0 40px;
     display: flex;
-    flex-grow: 1;
+    align-items: center;
 }
 
-.nav-item {
-    font-size: 0.95rem;
-    color: #5a3d41;
-    cursor: pointer;
-    font-weight: 400;
-}
-
-.nav-item.active {
-    color: #4a2e32;
+.navbar-brand {
+    font-size: 1.4rem;
     font-weight: 700;
+    color: #4a2e32;
+    margin-right: 25px;
 }
 
-.audio-controls {
-    margin-left: auto;
+.nav-link {
+    font-size: 1rem;
+    color: #7a5c60;
+    font-weight: 700;
+    margin-right: auto;
 }
 
 .audio-toggle-btn {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid #ffffff;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid white;
     padding: 6px 14px;
-    border-radius: 15px;
+    border-radius: 20px;
     color: #4a2e32;
     cursor: pointer;
     font-family: inherit;
-    font-size: 0.85rem;
-    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: 0.2s;
 }
 
 .audio-toggle-btn:hover {
     background: rgba(255, 255, 255, 0.8);
 }
 
-/* Main Screen Centered Body View Wrapper */
-.main-wrapper-body {
-    padding-top: 100px; /* Leaves clear space under the top navbar row */
-    min-height: 100vh;
+/* CENTER LAYOUT & WHITE CARD */
+.main-layout-container {
+    flex-grow: 1;
     display: flex;
-    align-items: center;
     justify-content: center;
-    position: relative;
-    z-index: 2;
+    align-items: center;
+    margin-top: 65px; /* Pushes content down below the fixed navbar */
+    padding: 40px 20px;
+    z-index: 10;
 }
 
-/* The Beautiful Main Floating White Presentation Card */
-.main-card-container {
-    background: rgba(255, 255, 255, 0.82); /* Soft semi-transparent white card */
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    max-width: 720px;
-    width: 90%;
+.glass-card {
+    background: #fdfafc; /* Soft white card background */
+    border-radius: 30px;
     padding: 50px 40px;
-    border-radius: 32px;
-    box-shadow: 0 15px 35px rgba(90, 61, 65, 0.06);
+    max-width: 700px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
 h1 {
-    font-size: 2.4rem;
-    margin-bottom: 16px;
-    color: #4a2e32; /* Deep warm plum text color */
+    font-size: 2.3rem;
     font-weight: 700;
+    margin-bottom: 15px;
+    color: #4a2e32;
 }
 
 .subtitle {
-    font-size: 1.05rem;
-    color: #5a3d41;
-    margin-bottom: 28px;
+    font-size: 1rem;
+    color: #7a5c60;
     font-weight: 700;
+    margin-bottom: 30px;
 }
 
 .description {
     font-size: 1rem;
-    line-height: 1.7;
-    color: #5a3d41;
-    margin-bottom: 35px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    padding: 0 20px;
 }
 
 .tap-instruction {
-    font-size: 0.95rem;
     font-style: italic;
     font-weight: 700;
-    margin-bottom: 20px;
-    color: #5a3d41;
-}
-
-#jar-container {
-    display: inline-block;
-    cursor: pointer;
-}
-
-/* Interactive SVG Jar Container Scaling Movements */
-.jar-svg-container {
-    display: inline-block;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#jar-container:hover .jar-svg-container {
-    transform: scale(1.06) translateY(-4px);
-}
-
-/* Affirmation Overlay Popup View Modal */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(90, 61, 65, 0.35);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-}
-
-.modal-content {
-    background: #ffffff;
-    max-width: 460px;
-    width: 88%;
-    padding: 35px;
-    border-radius: 24px;
-    text-align: center;
-    border: 2px solid #ffb7c5;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.08);
-    animation: popIn 0.3s ease-out;
-}
-
-.flower-icon {
-    font-size: 1.8rem;
-    color: #ffb7c5;
-    display: block;
     margin-bottom: 15px;
 }
 
-#modal-thought-text {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    color: #4a2e32;
-}
-
-.modal-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.btn-action, .btn-close {
-    padding: 12px;
-    border-radius: 20px;
-    font-family: inherit;
-    font-size: 0.95rem;
+/* JAR SVG & MODAL */
+#jar-container {
+    display: inline-block;
     cursor: pointer;
-    width: 100%;
-    transition: background 0.2s;
+    transition: transform 0.2s ease;
 }
 
-.btn-action {
+#jar-container:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(90, 61, 65, 0.4);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200;
+}
+
+.modal-content {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    border: 3px solid #ffb7c5;
+}
+
+.flower-icon { font-size: 2rem; color: #ffb7c5; display: block; margin-bottom: 10px; }
+#modal-thought-text { font-size: 1.1rem; line-height: 1.5; margin-bottom: 25px; font-weight: 700; }
+
+.modal-buttons { display: flex; flex-direction: column; gap: 10px; }
+.btn-action, .btn-close { padding: 12px; border-radius: 25px; cursor: pointer; font-family: inherit; font-size: 1rem; font-weight: 700; }
+.btn-action { background: #ffb7c5; border: none; color: white; }
+.btn-action:hover { background: #ffa4b4; }
+.btn-close { background: transparent; border: 2px dashed #ffb7c5; color: #ffb7c5; }
+
+/* FALLING PETALS */
+#petals-container {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
     background: #ffb7c5;
-    border: none;
-    color: #ffffff;
-    font-weight: bold;
+    border-radius: 150% 0 150% 150%;
+    opacity: 0.6;
+    animation: fall linear infinite;
 }
 
-.btn-action:hover {
-    background: #ffa4b4;
-}
-
-.btn-close {
-    background: transparent;
-    border: 1.5px dashed #ffb7c5;
-    color: #ffb7c5;
-}
-
-.btn-close:hover {
-    background: rgba(255, 183, 197, 0.1);
-}
-
-/* Animation Layout Keyframes */
-@keyframes fadeFall {
-    0% {
-        transform: translateY(-10px) translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.7;
-    }
-    90% {
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateY(105vh) translateX(100px) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-@keyframes popIn {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+@keyframes fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(100vh) translateX(50px) rotate(360deg); opacity: 0; }
 }
