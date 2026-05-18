@@ -1,315 +1,183 @@
-@{
-    ViewData["Title"] = "Home Page";
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yourfriendlyweb</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcf8f2;
+            --text-main: #4a3e3d;
+            --accent-pink: #fbc4c4;
+            --accent-soft: #ebdcd0;
+        }
 
-<div class="sakura-rain-container" id="sakura-container"></div>
-<div class="sparkle-star s1"></div>
-<div class="sparkle-star s2"></div>
-<div class="sparkle-star s3"></div>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            text-align: center;
+            position: relative;
+        }
 
-<div class="layout-nav-interceptor">
-    <button class="about-nav-btn" onclick="openAboutModal()" aria-label="About this website">
-        ✿ about
-    </button>
-</div>
+        /* Sakura Rain System */
+        .sakura-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-<div class="welcome-container">
-    <div class="lofi-frosted-panel">
-        <h1 class="lofi-main-title">Welcome to yourfriendlyweb!</h1>
-        <p class="lofi-subtitle">✿ take a deep breath and let your worries drift away ✿</p>
+        .petal {
+            position: absolute;
+            background-color: var(--accent-pink);
+            border-radius: 150px 0px 150px 150px;
+            opacity: 0.8;
+            transform-origin: left bottom;
+            animation: fall linear infinite;
+        }
 
-        <p class="lofi-body">this is your safe, quiet corner of the internet to just be, unwind, and rest. wrap yourself in a cozy blanket, watch the falling petals, and stay as long as you need.</p>
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(105vh) translateX(100px) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
 
-        <div class="jar-section-wrapper">
-            <p class="jar-instruction">feeling heavy? tap the jar to get a gentle reminder...</p>
+        /* Main Workspace Container */
+        .main-content {
+            z-index: 10;
+            max-width: 600px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
 
-            <button class="comfort-jar-btn" id="comfortJarButton" onclick="openComfortJar()" aria-label="Open the comfort jar">
-                <svg class="jar-svg-graphic" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#fcdad7" />
-                            <stop offset="40%" stop-color="#fca8b4" />
-                            <stop offset="100%" stop-color="#e28a98" />
-                        </linearGradient>
-                        <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="rgba(255, 255, 255, 0.9)" />
-                            <stop offset="30%" stop-color="rgba(253, 246, 247, 0.75)" />
-                            <stop offset="70%" stop-color="rgba(245, 226, 230, 0.5)" />
-                            <stop offset="100%" stop-color="rgba(230, 203, 210, 0.65)" />
-                        </linearGradient>
-                        <linearGradient id="leafLeft" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#417347" />
-                            <stop offset="50%" stop-color="#67a36e" />
-                            <stop offset="100%" stop-color="#89c290" />
-                        </linearGradient>
-                        <linearGradient id="leafRight" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#558c5c" />
-                            <stop offset="40%" stop-color="#84be8b" />
-                            <stop offset="100%" stop-color="#a3dba9" />
-                        </linearGradient>
-                    </defs>
+        h1 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 0;
+            color: #5c4a49;
+        }
 
-                    <ellipse cx="100" cy="222" rx="55" ry="10" fill="rgba(90, 48, 78, 0.08)" />
+        .subtitle {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.8;
+        }
 
-                    <path d="M 50,75 C 50,75 42,85 42,105 L 42,195 C 42,215 55,220 100,220 C 145,220 158,215 158,195 L 158,105 C 158,85 150,75 150,75 Z"
-                          fill="url(#glassGrad)" stroke="#523646" stroke-width="4.5" stroke-linejoin="round" />
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
 
-                    <path d="M 43,185 C 70,190 130,182 157,185 L 157,195 C 157,212 145,217 100,217 C 55,217 43,212 43,195 Z" fill="rgba(237, 216, 222, 0.4)" />
+        /* The Interactive Comfort Jar */
+        .jar-container {
+            margin: 30px 0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            position: relative;
+        }
 
-                    <path d="M 100,195 Q 96,155 101,115" fill="none" stroke="#523646" stroke-width="4.5" stroke-linecap="round" />
+        .jar-container:hover {
+            transform: scale(1.05);
+        }
 
-                    <path d="M 98,150 C 78,148 68,126 97,122 C 97,122 101,136 98,150 Z" fill="url(#leafLeft)" stroke="#523646" stroke-width="4" stroke-linejoin="round" />
-                    <path d="M 97,122 Q 88,135 91,142" fill="none" stroke="#523646" stroke-width="2.5" stroke-linecap="round" />
+        .jar-container:active {
+            transform: scale(0.95) rotate(-3deg);
+        }
 
-                    <path d="M 99,140 C 122,136 132,108 101,108 C 101,108 96,122 99,140 Z" fill="url(#leafRight)" stroke="#523646" stroke-width="4" stroke-linejoin="round" />
-                    <path d="M 101,108 Q 112,120 109,130" fill="none" stroke="#523646" stroke-width="2.5" stroke-linecap="round" />
+        .jar-svg {
+            width: 140px;
+            height: 180px;
+            filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.05));
+        }
 
-                    <path d="M 52,95 Q 49,145 53,190" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.6" />
-                    <path d="M 60,90 Q 57,115 61,135" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.4" />
-                    <ellipse cx="142" cy="105" rx="3" ry="12" transform="rotate(-10 142 105)" fill="#ffffff" opacity="0.5" />
+        /* Floating thoughts box */
+        .message-box {
+            min-height: 60px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #6e5554;
+            padding: 15px 25px;
+            border-radius: 20px;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 2px dashed var(--accent-pink);
+            max-width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
 
-                    <path d="M 62,75 L 138,75 L 134,63 L 66,63 Z" fill="#ffffff" stroke="#523646" stroke-width="4.5" stroke-linejoin="round" />
+    <div class="sakura-container" id="sakura-box"></div>
 
-                    <rect x="54" y="45" width="92" height="18" rx="9" fill="url(#lidGrad)" stroke="#523646" stroke-width="4.5" />
-                    <path d="M 57,57 L 143,57" stroke="#523646" stroke-width="3" stroke-linecap="round" opacity="0.3" />
-                </svg>
-            </button>
-        </div>
-    </div>
-</div>
+    <div class="main-content">
+        <h1>Welcome to yourfriendlyweb!</h1>
+        <p class="subtitle">✿ take a deep breath and let your worries drift away ✿</p>
+        <p class="description">
+            This is your safe, quiet corner of the internet to just be, unwind, and rest. 
+            Wrap yourself in a cozy blanket, watch the falling petals, and stay as long as you need.
+        </p>
 
-<div class="comfort-modal-overlay" id="comfortModal" onclick="closeComfortJarOutside(event)">
-    <div class="comfort-card" onclick="event.stopPropagation()">
-
-        <div class="card-flower-container">
-            <svg class="sakura-mini-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="sakuraGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#ffccd5" />
-                        <stop offset="100%" stop-color="#fca8b4" />
-                    </linearGradient>
-                </defs>
-                <g transform="translate(50,50)">
-                    <g fill="url(#sakuraGrad)">
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" />
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" transform="rotate(72)" />
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" transform="rotate(144)" />
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" transform="rotate(216)" />
-                        <path d="M 0,0 C -12,-22 -18,-35 -7,-45 C -2,-50 2,-50 7,-45 C 18,-35 12,-22 0,0 Z" transform="rotate(288)" />
-                    </g>
-                    <g stroke="#f391a0" stroke-width="1.5" opacity="0.65" fill="none">
-                        <line x1="0" y1="0" x2="0" y2="-18" />
-                        <line x1="0" y1="0" x2="17" y2="-6" />
-                        <line x1="0" y1="0" x2="11" y2="15" />
-                        <line x1="0" y1="0" x2="-11" y2="15" />
-                        <line x1="0" y1="0" x2="-17" y2="-6" />
-                    </g>
-                    <circle cx="0" cy="0" r="5" fill="#fcd7bc" opacity="0.9" />
-                </g>
+        <div class="jar-container" onclick="drawThought()">
+            <svg class="jar-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M35 15 h30 v6 h-30 z" fill="#ebdcd0" stroke="#5c4a49" stroke-width="2"/>
+                <path d="M38 21 h24 v8 h-24 z" fill="#fff" opacity="0.5" stroke="#5c4a49" stroke-width="2"/>
+                <path d="M38 29 C25 35 20 50 20 75 C20 100 30 110 50 110 C70 110 80 100 80 75 C80 50 75 35 62 29 Z" fill="#fff" fill-opacity="0.6" stroke="#5c4a49" stroke-width="2"/>
+                <path d="M50 65 C50 65 43 58 43 53 C43 49 46 46 50 50 C54 46 57 49 57 53 C57 58 50 65 50 65 Z" fill="#fbc4c4"/>
             </svg>
         </div>
 
-        <p class="comfort-message-text" id="comfortMessage">Loading a gentle thought...</p>
-        <div class="card-buttons" id="modalActionButtons">
-            <button class="btn-card-action secondary" onclick="drawAnother()">pick another leaf 🍃</button>
-            <button class="btn-card-action primary" onclick="closeComfortJar()">close box ✿</button>
-        </div>
-
-        <div class="card-buttons" id="aboutCloseButtonPanel" style="display: none;">
-            <button class="btn-card-action primary" onclick="closeComfortJar()">close ✿</button>
+        <div class="message-box" id="thought-display">
+            Tap the jar to get a gentle reminder...
         </div>
     </div>
-</div>
 
-<footer class="lofi-footer">
-    &copy; 2026 - yourfriendlyweb
-</footer>
+    <script>
+        // Array of comfort thoughts
+        const thoughts = [
+            "You are doing much better than you give yourself credit for.",
+            "It is completely okay to take a break right now.",
+            "Mistakes are just data points. Look how much you learned today!",
+            "Take one deep breath. In... and out. You've got this.",
+            "Your value isn't tied to your productivity. Rest is productive too.",
+            "Proud of you for trying your best.",
+            "Whatever is feeling heavy right now will pass eventually."
+        ];
 
-<script>
-    const messages = [
-        "You are doing the best you can with what you have right now, and that is completely enough.",
-        "Take a deep breath. You don't have to figure everything out today. Just focus on this exact second.",
-        "It is okay to be tired. It is okay to rest. Be gentle with your mind today.",
-        "You are worthy of kindness, safety, and peace—simply because you exist.",
-        "Your feelings are valid, but they are also like clouds. Let them roll across the sky without holding onto them.",
-        "You have survived 100% of your hardest days so far. You are incredibly resilient.",
-        "The world is moving fast, but you are allowed to slow down. You aren't falling behind.",
-        "It's okay if all you did today was breathe. That's a beautiful victory.",
-        "You don't have to carry the weight of tomorrow right now. Let it go for just a little while.",
-        "In this exact moment, you are safe. There is nothing you need to fix or change right now.",
-        "Be proud of how hard you are trying, even on the days where it feels like nobody sees it.",
-        "Healing isn't a straight line, and having a heavy day doesn't erase all of your progress.",
-        "Give yourself permission to let go of expectations that aren't yours to carry.",
-        "Like flowers, you too will bloom in your own beautiful time. Do not rush your process.",
-        "You don't need to earn rest. Rest is your natural right whenever your spirit is tired."
-    ];
-
-    function openComfortJar() {
-        document.getElementById('aboutCloseButtonPanel').style.display = 'none';
-        document.getElementById('modalActionButtons').style.display = 'flex';
-        drawAnother();
-        const modal = document.getElementById('comfortModal');
-        if (modal) {
-            modal.classList.add('active');
-        }
-    }
-
-    function openAboutModal() {
-        const textEl = document.getElementById('comfortMessage');
-        if (textEl) {
-            textEl.innerText = "yourfriendlyweb is a small, quiet sanctuary made to give you a momentary break from the noise of the digital world. No trackers, no tasks, no endless feeds—just a gentle space to pause, breathe, and gather yourself.";
-            textEl.style.opacity = 1;
-        }
-        document.getElementById('modalActionButtons').style.display = 'none';
-        document.getElementById('aboutCloseButtonPanel').style.display = 'flex';
-
-        const modal = document.getElementById('comfortModal');
-        if (modal) {
-            modal.classList.add('active');
-        }
-    }
-
-    /* Standardized close functions to unify window dismiss execution paths */
-    function closeComfortJar() {
-        const modal = document.getElementById('comfortModal');
-        if (modal) {
-            modal.classList.remove('active');
-        }
-    }
-
-    function closeComfortJarOutside(e) {
-        if (e.target === document.getElementById('comfortModal')) {
-            closeComfortJar();
-        }
-    }
-
-    function drawAnother() {
-        const textEl = document.getElementById('comfortMessage');
-        if (!textEl) return;
-
-        const randomIndex = Math.floor(Math.random() * messages.length);
-
-        textEl.style.opacity = 0;
-        setTimeout(() => {
-            textEl.innerText = messages[randomIndex];
-            textEl.style.opacity = 1;
-        }, 150);
-    }
-
-    function createPetal() {
-        const container = document.getElementById('sakura-container');
-        if (!container) return;
-        const petal = document.createElement('div');
-        petal.classList.add('sakura-petal');
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = (Math.random() * 6 + 6) + 's';
-        petal.style.opacity = Math.random() * 0.6 + 0.4;
-        const size = Math.random() * 8 + 6;
-        petal.style.width = size + 'px';
-        petal.style.height = (size * 1.4) + 'px';
-        container.appendChild(petal);
-        setTimeout(() => petal.remove(), 12000);
-    }
-    setInterval(createPetal, 350);
-</script>
-
-<style>
-    /* Injected layout override configs to wipe the legacy audio layout triggers */
-    [id*="btn-lofi"],
-    [id*="btn-rain"],
-    .header-controls,
-    .audio-controls,
-    header .nav-item button,
-    header [class*="audio"] {
-        display: none !important;
-    }
-
-    /* Fixed Layout Header Interceptor Layer */
-    .layout-nav-interceptor {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 0;
-        z-index: 2000;
-        pointer-events: none;
-    }
-
-    .about-nav-btn {
-        position: absolute;
-        top: 15px;
-        right: 25px;
-        pointer-events: auto;
-        background-color: #ffffff;
-        color: #523646;
-        border: 2px solid #523646;
-        border-radius: 25px;
-        padding: 5px 22px;
-        font-family: inherit;
-        font-size: 0.92rem;
-        font-weight: 700;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-        transition: all 0.2s ease-in-out;
-    }
-
-        .about-nav-btn:hover {
-            background-color: #fca8b4;
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
-
-    .card-flower-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 22px;
-        width: 100%;
-    }
-
-    .sakura-mini-svg {
-        width: 44px;
-        height: 44px;
-        display: block;
-        animation: flowerWobble 5s ease-in-out infinite alternate;
-    }
-
-    @@keyframes flowerWobble {
-        0% {
-            transform: rotate(-3deg) scale(0.98);
-        }
-
-        100% {
-            transform: rotate(3deg) scale(1.02);
-        }
-    }
-
-    /* Mobile Media Query Enhancements */
-    @@media (max-width: 600px) {
-        .lofi-frosted-panel {
-            padding: 24px 16px !important;
-            margin: 0 12px;
-            width: calc(100% - 24px) !important;
-        }
-
-        .lofi-main-title {
-            font-size: 1.8rem !important;
-        }
-
-        .lofi-subtitle {
-            font-size: 0.95rem !important;
-        }
-
-        .jar-svg-graphic {
-            max-width: 150px !important;
-            height: auto !important;
-        }
-
-        .about-nav-btn {
-            top: 12px;
-            right: 15px;
-            padding: 4px 16px;
-            font-size: 0.85rem;
-        }
-    }
-</style>
+        function drawThought() {
+            const display = document.getElementById('thought-display');
+            const randomIndex = Math.floor(Math.random() * thoughts.length);
+            
+            // Apply a quick fade effect
+            display.style.opacity = 0;
+            setTimeout(() => {
+                display.innerText = thoughts[randomIndex];
+                display.style.opacity =
